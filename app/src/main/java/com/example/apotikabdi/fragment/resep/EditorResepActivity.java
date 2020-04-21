@@ -32,6 +32,7 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,6 +48,7 @@ public class EditorResepActivity extends AppCompatActivity implements EditorRese
     Button buttonTambahObat, buttonHapusObat, buttonTotalHarga;
     TextView textViewObat1;
     LinearLayout linearLayout;
+    Toolbar toolbar;
 
     String id, kodeObat1, kodeObat2, kodeObat3, kodeObat4, kodeObat5, hargaObat1, hargaObat2, hargaObat3, hargaObat4, hargaObat5, nomor_antrian, pasien_nama, nama_obat, jumlah_obat, total_obat, kode_obat, id_obat;
     int jumlah1, jumlah2, jumlah3, jumlah4, jumlah5, total1, total2, total3, total4, total5, subTotal;
@@ -67,9 +69,10 @@ public class EditorResepActivity extends AppCompatActivity implements EditorRese
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor_resep);
 
-        //Objects.requireNonNull(getSupportActionBar()).setTitle("Tambah Data Resep");
-
         bindViews();
+
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Tambah Data Resep");
 
         numberFormat = NumberFormat.getCurrencyInstance();
 
@@ -78,17 +81,9 @@ public class EditorResepActivity extends AppCompatActivity implements EditorRese
 
         editorResepPresenter = new EditorResepPresenter(this);
 
-        Intent intent = getIntent();
-        id_obat = intent.getStringExtra("id_obat");
-        kode_obat = intent.getStringExtra("kode_obat");
-        nama_obat = intent.getStringExtra("nama_obat");
-        jumlah_obat = intent.getStringExtra("jumlah_obat");
-        total_obat = intent.getStringExtra("total_obat");
-
         setDataFromIntentExtra();
         selectDaftarAntrian();
         selectDaftarObat();
-
         viewOnClick();
     }
 
@@ -206,27 +201,53 @@ public class EditorResepActivity extends AppCompatActivity implements EditorRese
         }
     }
 
+    @Override
+    public void showProgress() {
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgress() {
+        progressDialog.hide();
+    }
+
+    @Override
+    public void onRequestSuccess(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    @Override
+    public void onRequestError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
     private void bindViews(){
 
         linearLayout = findViewById(R.id.linear_layout_resep);
-        editTextIDResep = findViewById(R.id.edit_text_id_resep);
+
         textViewObat1 = findViewById(R.id.label_obat_1);
+
         textInputLayoutNamaPasien = findViewById(R.id.layout_nama_pasien);
         textInputLayoutTotal1 = findViewById(R.id.layout_total_harga1);
         textInputLayoutTotal2 = findViewById(R.id.layout_total_harga2);
         textInputLayoutTotal3 = findViewById(R.id.layout_total_harga3);
         textInputLayoutTotal4 = findViewById(R.id.layout_total_harga4);
         textInputLayoutTotal5 = findViewById(R.id.layout_total_harga5);
+
         autoCompleteTextViewNamaPasien = findViewById(R.id.auto_complete_nama_pasien);
         autoCompleteTextViewObat1 = findViewById(R.id.auto_complete_obat1);
         autoCompleteTextViewObat2 = findViewById(R.id.auto_complete_obat2);
         autoCompleteTextViewObat3 = findViewById(R.id.auto_complete_obat3);
         autoCompleteTextViewObat4 = findViewById(R.id.auto_complete_obat4);
         autoCompleteTextViewObat5 = findViewById(R.id.auto_complete_obat5);
+
         cardViewObat2 = findViewById(R.id.card_view_obat2);
         cardViewObat3 = findViewById(R.id.card_view_obat3);
         cardViewObat4 = findViewById(R.id.card_view_obat4);
         cardViewObat5 = findViewById(R.id.card_view_obat5);
+
+        editTextIDResep = findViewById(R.id.edit_text_id_resep);
         editTextJumlah1 = findViewById(R.id.edit_text_jumlah1);
         editTextJumlah2 = findViewById(R.id.edit_text_jumlah2);
         editTextJumlah3 = findViewById(R.id.edit_text_jumlah3);
@@ -238,9 +259,12 @@ public class EditorResepActivity extends AppCompatActivity implements EditorRese
         editTextTotal4 = findViewById(R.id.edit_text_total_harga4);
         editTextTotal5 = findViewById(R.id.edit_text_total_harga5);
         editTextSubTotal = findViewById(R.id.edit_text_subtotal);
+
         buttonTambahObat = findViewById(R.id.button_tambah_obat);
         buttonHapusObat = findViewById(R.id.button_hapus_obat);
         buttonTotalHarga = findViewById(R.id.button_total_harga);
+
+        toolbar = findViewById(R.id.toolbar_editor_resep);
 
         autoCompleteTextViewObat1.setInputType(InputType.TYPE_NULL);
         autoCompleteTextViewObat2.setInputType(InputType.TYPE_NULL);
@@ -446,13 +470,19 @@ public class EditorResepActivity extends AppCompatActivity implements EditorRese
 
     private void setDataFromIntentExtra() {
 
+        Intent intent = getIntent();
+        id_obat = intent.getStringExtra("id_obat");
+        kode_obat = intent.getStringExtra("kode_obat");
+        nama_obat = intent.getStringExtra("nama_obat");
+        jumlah_obat = intent.getStringExtra("jumlah_obat");
+        total_obat = intent.getStringExtra("total_obat");
+
         if (id_obat != null) {
             editTextIDResep.setText(id_obat);
             autoCompleteTextViewObat1.setText(nama_obat);
             editTextJumlah1.setText(jumlah_obat);
             editTextTotal1.setText(numberFormat.format(Integer.parseInt(total_obat)));
-
-            //Objects.requireNonNull(getSupportActionBar()).setTitle("Data Resep");
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Data Resep");
             readMode();
         } else {
             selectIDResep();
@@ -462,7 +492,7 @@ public class EditorResepActivity extends AppCompatActivity implements EditorRese
 
     private void editMode() {
 
-        //Objects.requireNonNull(getSupportActionBar()).setTitle("Ubah Data Resep");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Ubah Data Resep");
         autoCompleteTextViewObat1.setEnabled(true);
         editTextJumlah1.setEnabled(true);
         editTextTotal1.setEnabled(true);
@@ -485,26 +515,5 @@ public class EditorResepActivity extends AppCompatActivity implements EditorRese
 
         int harga_obat = Integer.parseInt(total_obat) / Integer.parseInt(jumlah_obat);
         hargaObat1 = Integer.toString(harga_obat);
-    }
-
-    @Override
-    public void showProgress() {
-        progressDialog.show();
-    }
-
-    @Override
-    public void hideProgress() {
-        progressDialog.hide();
-    }
-
-    @Override
-    public void onRequestSuccess(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        finish();
-    }
-
-    @Override
-    public void onRequestError(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

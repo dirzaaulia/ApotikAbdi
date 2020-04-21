@@ -49,18 +49,10 @@ public class EditorAntrianActivity extends AppCompatActivity implements EditorAn
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor_antrian);
 
-        toolbar = findViewById(R.id.toolbar_editor_antrian);
+        bindViews();
+
         setSupportActionBar(toolbar);
-        //Objects.requireNonNull(getSupportActionBar()).setTitle("Tambah Data Antrian");
-
-        editTextKeluhan = findViewById(R.id.keluhan);
-        autoCompleteTextViewNamaPasien = findViewById(R.id.auto_complete);
-        textInputLayout = findViewById(R.id.textInputLayout1);
-
-        Intent intent = getIntent();
-        id = intent.getStringExtra("id");
-        nama_pasien = intent.getStringExtra("nama_pasien");
-        keluhan = intent.getStringExtra("keluhan");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Tambah Data Antrian");
 
         setDataFromIntentExtra();
 
@@ -153,6 +145,27 @@ public class EditorAntrianActivity extends AppCompatActivity implements EditorAn
         }
     }
 
+    @Override
+    public void showProgress() {
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgress() {
+        progressDialog.hide();
+    }
+
+    @Override
+    public void onRequestSuccess(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    @Override
+    public void onRequestError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
     private void selectNamaPasien() {
 
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
@@ -184,18 +197,23 @@ public class EditorAntrianActivity extends AppCompatActivity implements EditorAn
 
     private void setDataFromIntentExtra() {
 
+        Intent intent = getIntent();
+        id = intent.getStringExtra("id");
+        nama_pasien = intent.getStringExtra("nama_pasien");
+        keluhan = intent.getStringExtra("keluhan");
+
         if (id != null) {
 
             autoCompleteTextViewNamaPasien.setText(nama_pasien);
             editTextKeluhan.setText(keluhan);
-            //Objects.requireNonNull(getSupportActionBar()).setTitle("Data Antrian");
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Data Antrian");
             readMode();
         }
     }
 
     private void editMode() {
 
-        //Objects.requireNonNull(getSupportActionBar()).setTitle("Ubah Data Antrian");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Ubah Data Antrian");
         textInputLayout.setEndIconMode(TextInputLayout.END_ICON_DROPDOWN_MENU);
         autoCompleteTextViewNamaPasien.setEnabled(true);
         editTextKeluhan.setEnabled(true);
@@ -208,24 +226,12 @@ public class EditorAntrianActivity extends AppCompatActivity implements EditorAn
         editTextKeluhan.setEnabled(false);
     }
 
-    @Override
-    public void showProgress() {
-        progressDialog.show();
+    private void bindViews() {
+
+        editTextKeluhan = findViewById(R.id.keluhan);
+        autoCompleteTextViewNamaPasien = findViewById(R.id.auto_complete);
+        textInputLayout = findViewById(R.id.textInputLayout1);
+        toolbar = findViewById(R.id.toolbar_editor_antrian);
     }
 
-    @Override
-    public void hideProgress() {
-        progressDialog.hide();
-    }
-
-    @Override
-    public void onRequestSuccess(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        finish();
-    }
-
-    @Override
-    public void onRequestError(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
 }

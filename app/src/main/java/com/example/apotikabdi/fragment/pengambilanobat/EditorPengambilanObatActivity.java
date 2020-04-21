@@ -2,21 +2,17 @@ package com.example.apotikabdi.fragment.pengambilanobat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.apotikabdi.R;
 import com.example.apotikabdi.api.SdkConfig;
 import com.google.android.material.textfield.TextInputEditText;
-import com.midtrans.sdk.corekit.callback.CardRegistrationCallback;
 import com.midtrans.sdk.corekit.callback.TransactionFinishedCallback;
 import com.midtrans.sdk.corekit.core.MidtransSDK;
-import com.midtrans.sdk.corekit.core.PaymentMethod;
 import com.midtrans.sdk.corekit.core.TransactionRequest;
 import com.midtrans.sdk.corekit.core.themes.CustomColorTheme;
 import com.midtrans.sdk.corekit.models.BankType;
-import com.midtrans.sdk.corekit.models.CardRegistrationResponse;
 import com.midtrans.sdk.corekit.models.CustomerDetails;
 import com.midtrans.sdk.corekit.models.ItemDetails;
 import com.midtrans.sdk.corekit.models.snap.CreditCard;
@@ -24,13 +20,16 @@ import com.midtrans.sdk.corekit.models.snap.TransactionResult;
 import com.midtrans.sdk.uikit.SdkUIFlowBuilder;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class EditorPengambilanObatActivity extends AppCompatActivity implements TransactionFinishedCallback {
 
     TextInputEditText editTextIDResep, editTextNamaPasien, editTextTanggal, editTextSubTotal;
     Button buttonBayar;
+    Toolbar toolbar;
 
     String id_resep, nama_pasien, tanggal, sub_total;
 
@@ -41,8 +40,10 @@ public class EditorPengambilanObatActivity extends AppCompatActivity implements 
 
         bindViews();
 
-        setDataFromIntentExtra();
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Data Pengambilan Obat");
 
+        setDataFromIntentExtra();
         initMidtransSdk();
         initActionButtons();
     }
@@ -54,7 +55,7 @@ public class EditorPengambilanObatActivity extends AppCompatActivity implements 
         editTextTanggal = findViewById(R.id.edit_text_tanggal);
         editTextSubTotal = findViewById(R.id.edit_text_subtotal_pengambilan_obat);
         buttonBayar = findViewById(R.id.button_bayar);
-
+        toolbar = findViewById(R.id.toolbar_editor_pengambilan_obat);
     }
 
     private void setDataFromIntentExtra() {
@@ -164,13 +165,9 @@ public class EditorPengambilanObatActivity extends AppCompatActivity implements 
     }
 
     private void initActionButtons() {
-        buttonBayar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                MidtransSDK.getInstance().setTransactionRequest(initTransactionRequest());
-                MidtransSDK.getInstance().startPaymentUiFlow(EditorPengambilanObatActivity.this);
-            }
+        buttonBayar.setOnClickListener(v -> {
+            MidtransSDK.getInstance().setTransactionRequest(initTransactionRequest());
+            MidtransSDK.getInstance().startPaymentUiFlow(EditorPengambilanObatActivity.this);
         });
     }
 }

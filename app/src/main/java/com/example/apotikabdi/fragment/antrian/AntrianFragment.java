@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -16,7 +14,6 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,8 +27,11 @@ public class AntrianFragment extends Fragment implements AntrianView {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
+    private ExtendedFloatingActionButton fab;
+
     private AntrianPresenter antrianPresenter;
     private AntrianAdapter.ItemClickListener itemClickListener;
+
     private List<Antrian> antrian;
 
     @Override
@@ -40,19 +40,15 @@ public class AntrianFragment extends Fragment implements AntrianView {
 
         View root = inflater.inflate(R.layout.fragment_antrian, container, false);
 
-        setHasOptionsMenu(true);
-        swipeRefreshLayout = root.findViewById(R.id.swipe_refresh_antrian);
-        recyclerView = root.findViewById(R.id.recycler_view_antrian);
+        bindViews(root);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ExtendedFloatingActionButton fab = root.findViewById(R.id.fab_tambahantrian);
         fab.setOnClickListener(v -> startActivity(new Intent(getActivity(), EditorAntrianActivity.class)));
 
-        //Inisiasi class presenter
         antrianPresenter = new AntrianPresenter(this);
         antrianPresenter.getDaftarAntrian();
 
-        //Saat tampilan direfresh
         swipeRefreshLayout.setOnRefreshListener(() -> antrianPresenter.getDaftarAntrian());
 
         itemClickListener = ((view, position) -> {
@@ -71,11 +67,6 @@ public class AntrianFragment extends Fragment implements AntrianView {
 
         });
         return root;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_fragment, menu);
     }
 
     @Override
@@ -112,5 +103,12 @@ public class AntrianFragment extends Fragment implements AntrianView {
     @Override
     public void onErrorLoad(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void bindViews(View view) {
+
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_antrian);
+        recyclerView = view.findViewById(R.id.recycler_view_antrian);
+        fab = view.findViewById(R.id.fab_tambahantrian);
     }
 }

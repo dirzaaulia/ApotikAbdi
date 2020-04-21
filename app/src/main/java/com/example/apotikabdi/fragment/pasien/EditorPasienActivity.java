@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class EditorPasienActivity extends AppCompatActivity implements EditorPasienView {
 
@@ -27,6 +28,7 @@ public class EditorPasienActivity extends AppCompatActivity implements EditorPas
     RadioButton radioButtonJenisKelamin, radioButtonLakiLaki, radioButtonPerempuan;
     ProgressDialog progressDialog;
     Menu actionMenu;
+    Toolbar toolbar;
 
     String id, no_rekammedis, nama, tanggal_lahir, jenis_kelamin, alamat, nohp;
 
@@ -36,39 +38,16 @@ public class EditorPasienActivity extends AppCompatActivity implements EditorPas
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor_pasien);
-        //Objects.requireNonNull(getSupportActionBar()).setTitle("Tambah Data Pasien");
 
-        editTextRekamMedis = findViewById(R.id.nomor_rekammedis);
-        editTextNamaPasien = findViewById(R.id.nama_pasien);
-        editTextTanggalLahir = findViewById(R.id.tanggal_lahir);
-        editTextAlamat = findViewById(R.id.alamat);
-        editTextNomorHandphone = findViewById(R.id.nomor_handphone);
-        radioGroupJenisKelamin = findViewById(R.id.jenis_kelamin);
-        radioButtonLakiLaki = findViewById(R.id.laki_laki);
-        radioButtonPerempuan = findViewById(R.id.perempuan);
+        bindViews();
 
-        Intent intent = getIntent();
-        id = intent.getStringExtra("id");
-        nama = intent.getStringExtra("nama");
-        no_rekammedis = intent.getStringExtra("no_rekammedis");
-        tanggal_lahir = intent.getStringExtra("tanggal_lahir");
-        jenis_kelamin = intent.getStringExtra("jenis_kelamin");
-        alamat = intent.getStringExtra("alamat");
-        nohp = intent.getStringExtra("nohp");
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Tambah Data Antrian");
 
         setDataFromIntentExtra();
 
         editTextTanggalLahir.setOnLongClickListener(v -> {
-
-            MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker();
-            builder.setTitleText("Pilih Tanggal Lahir Pasien");
-            //builder.setInputMode(MaterialDatePicker.INPUT_MODE_CALENDAR);
-            builder.setSelection(Calendar.getInstance().getTimeInMillis());
-
-            MaterialDatePicker<Long> picker = builder.build();
-            picker.show(getSupportFragmentManager(), picker.toString());
-            picker.addOnPositiveButtonClickListener(selection -> editTextTanggalLahir.setText(picker.getHeaderText()));
-
+            showCalendar();
             return false;
         });
 
@@ -105,7 +84,6 @@ public class EditorPasienActivity extends AppCompatActivity implements EditorPas
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
 
         int idJenisKelamin = radioGroupJenisKelamin.getCheckedRadioButtonId();
         radioButtonJenisKelamin = findViewById(idJenisKelamin);
@@ -203,6 +181,15 @@ public class EditorPasienActivity extends AppCompatActivity implements EditorPas
 
     private void setDataFromIntentExtra() {
 
+        Intent intent = getIntent();
+        id = intent.getStringExtra("id");
+        nama = intent.getStringExtra("nama");
+        no_rekammedis = intent.getStringExtra("no_rekammedis");
+        tanggal_lahir = intent.getStringExtra("tanggal_lahir");
+        jenis_kelamin = intent.getStringExtra("jenis_kelamin");
+        alamat = intent.getStringExtra("alamat");
+        nohp = intent.getStringExtra("nohp");
+
         if (id != null) {
 
             editTextRekamMedis.setText(no_rekammedis);
@@ -246,5 +233,30 @@ public class EditorPasienActivity extends AppCompatActivity implements EditorPas
         editTextNomorHandphone.setEnabled(false);
         radioButtonLakiLaki.setClickable(false);
         radioButtonPerempuan.setClickable(false);
+    }
+
+    private void bindViews() {
+
+        editTextRekamMedis = findViewById(R.id.nomor_rekammedis);
+        editTextNamaPasien = findViewById(R.id.nama_pasien);
+        editTextTanggalLahir = findViewById(R.id.tanggal_lahir);
+        editTextAlamat = findViewById(R.id.alamat);
+        editTextNomorHandphone = findViewById(R.id.nomor_handphone);
+
+        radioGroupJenisKelamin = findViewById(R.id.jenis_kelamin);
+        radioButtonLakiLaki = findViewById(R.id.laki_laki);
+        radioButtonPerempuan = findViewById(R.id.perempuan);
+
+        toolbar = findViewById(R.id.toolbar_editor_pasien);
+    }
+
+    private void showCalendar() {
+        MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker();
+        builder.setTitleText("Pilih Tanggal Lahir Pasien");
+        builder.setSelection(Calendar.getInstance().getTimeInMillis());
+
+        MaterialDatePicker<Long> picker = builder.build();
+        picker.show(getSupportFragmentManager(), picker.toString());
+        picker.addOnPositiveButtonClickListener(selection -> editTextTanggalLahir.setText(picker.getHeaderText()));
     }
 }
