@@ -47,4 +47,11 @@
     <string name="antrian">Antrian</string>
     <string name="tanggal">Tanggal</string>
     <string name="bayar">Bayar</string>
+    <string name="rekomendasi">Rekomendasi</string>
+    <string name="tampilkan_rekomendasi">Tampilkan Rekomendasi</string>
+    <string name="terapkan_rekomendasi">Terapkan Rekomendasi</string>
+    <string name="contoh_kode_obat">MOS0016</string>
+    <string name="contoh_nama_obat">ALLUPURINOL 100</string>
+    <string name="contoh_harga_awal">Harga Awal Per Satuan : Rp.322</string>
+    <string name="contoh_harga_akhir">Harga Akhir Per Satuan : Rp.305</string>
 </resources>

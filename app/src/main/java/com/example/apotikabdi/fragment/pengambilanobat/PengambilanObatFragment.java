@@ -3,15 +3,20 @@ package com.example.apotikabdi.fragment.pengambilanobat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.apotikabdi.R;
+import com.example.apotikabdi.fragment.rekomendasi.EditorRekomendasiHargaObatActivity;
 import com.example.apotikabdi.model.PengambilanObat;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +35,7 @@ public class PengambilanObatFragment extends Fragment implements PengambilanObat
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_pengambilan_obat, container, false);
+        setHasOptionsMenu(true);
 
         swipeRefreshLayout = root.findViewById(R.id.swipe_refresh_pengambilan_obat);
         recyclerView = root.findViewById(R.id.recycler_view_pengambilan_obat);
@@ -62,6 +68,24 @@ public class PengambilanObatFragment extends Fragment implements PengambilanObat
         });
 
         return root;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_fragment, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.menu_rekomendasi) {
+            Intent intent = new Intent(getActivity(), EditorRekomendasiHargaObatActivity.class);
+            startActivity(intent);
+            return false;
+        }
+
+        return false;
     }
 
     @Override

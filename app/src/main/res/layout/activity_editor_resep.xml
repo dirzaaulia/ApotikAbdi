@@ -37,13 +37,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tambah_obat" />
 
-            <Button
-                android:id="@+id/button_total_harga"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/hitung_total_harga_obat" />
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_view_obat1"
                 android:layout_width="match_parent"
@@ -474,21 +467,12 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layout_id_resep"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <Button
+                android:id="@+id/button_total_harga"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/nomor_resep"
-                app:errorEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_text_id_resep"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                android:text="@string/hitung_total_harga_obat" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_nama_pasien"
@@ -506,6 +490,23 @@
                     tools:ignore="LabelFor" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_id_resep"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nomor_resep"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_id_resep"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_subtotal"

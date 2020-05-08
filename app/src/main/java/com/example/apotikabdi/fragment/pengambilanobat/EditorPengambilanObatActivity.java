@@ -100,8 +100,8 @@ public class EditorPengambilanObatActivity extends AppCompatActivity implements 
 
         creditCard.setSaveCard(false); // when using one/two click set to true and if normal set to  false
 
-//        this methode deprecated use setAuthentication instead
-//        creditCard.setSecure(true); // when using one click must be true, for normal and two click (optional)
+        //this methode deprecated use setAuthentication instead
+        //creditCard.setSecure(true); // when using one click must be true, for normal and two click (optional)
 
         //creditCard.setAuthentication(CreditCard.AUTHENTICATION_TYPE_3DS);
 

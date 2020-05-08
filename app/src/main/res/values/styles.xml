@@ -44,6 +44,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+        <item name="android:textColorSecondary">@color/colorWhite</item>
+
     </style>
 
     <style name="Theme.MyAppNoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">

@@ -52,7 +52,7 @@
             android:id="@+id/keluhan"
             android:textSize="12sp"
             android:layout_below="@+id/nama_pasien_antrian"
-            android:text="@string/nama_pasien"/>
+            android:text="@string/keluhan" />
 
     </RelativeLayout>
 

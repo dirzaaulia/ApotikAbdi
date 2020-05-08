@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
+        tools:ignore="AllowBackup"
         tools:replace="android:allowBackup">
+        <activity android:name=".fragment.rekomendasi.EditorRekomendasiHargaObatActivity" />
         <activity android:name=".fragment.pengambilanobat.EditorPengambilanObatActivity" />
         <activity android:name=".fragment.resep.EditorResepActivity" />
         <activity
