@@ -7,6 +7,20 @@
     android:orientation="vertical"
     tools:context=".fragment.rekomendasi.EditorRekomendasiHargaObatActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_editor_rekomendasi_harga_obat"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/colorWhite" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
     <LinearLayout
         android:id="@+id/linear_layout_pengambilan_obat"
         android:layout_width="match_parent"
@@ -23,13 +37,6 @@
             android:layout_height="wrap_content"
             android:text="@string/tampilkan_rekomendasi" />
 
-        <Button
-            android:id="@+id/button_terapkan_rekomendasi"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/terapkan_rekomendasi"
-            android:textColor="@color/colorRed" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_daftar_rekomendasi"
@@ -101,19 +108,14 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-    </LinearLayout>
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_editor_rekomendasi_harga_obat"
+        <Button
+            android:id="@+id/button_terapkan_rekomendasi"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:titleTextColor="@color/colorWhite" />
+            android:layout_height="wrap_content"
+            android:text="@string/terapkan_rekomendasi"
+            android:textColor="@color/colorRed" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </LinearLayout>
 
 </LinearLayout>
