@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apotikabdi.R;
@@ -19,7 +21,6 @@ import com.example.apotikabdi.model.Pasien;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.List;
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -93,11 +94,16 @@ public class PasienFragment extends Fragment implements PasienView {
 
         inflater.inflate(R.menu.main, menu);
 
-        SearchManager searchManager = (SearchManager) Objects.requireNonNull(getActivity()).getSystemService(Context.SEARCH_SERVICE);
+        SearchManager searchManager = (SearchManager) requireActivity().getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        int id = searchView.getContext()
+                .getResources()
+                .getIdentifier("android:id/search_src_text", null, null);
+        TextView textView = searchView.findViewById(id);
+        textView.setTextColor(Color.WHITE);
 
         searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(getActivity().getComponentName())
+                searchManager.getSearchableInfo(requireActivity().getComponentName())
         );
 
         searchView.setIconifiedByDefault(false);

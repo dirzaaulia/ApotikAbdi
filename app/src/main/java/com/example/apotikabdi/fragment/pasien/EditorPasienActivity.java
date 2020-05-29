@@ -43,6 +43,9 @@ public class EditorPasienActivity extends AppCompatActivity implements EditorPas
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Tambah Data Antrian");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         setDataFromIntentExtra();
 

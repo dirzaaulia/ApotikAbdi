@@ -73,6 +73,9 @@ public class EditorResepActivity extends AppCompatActivity implements EditorRese
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Tambah Data Resep");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         numberFormat = NumberFormat.getCurrencyInstance();
 

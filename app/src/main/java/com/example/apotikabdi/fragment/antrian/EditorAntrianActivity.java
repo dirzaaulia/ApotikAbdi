@@ -53,6 +53,9 @@ public class EditorAntrianActivity extends AppCompatActivity implements EditorAn
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Tambah Data Antrian");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         setDataFromIntentExtra();
 

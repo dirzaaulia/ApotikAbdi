@@ -42,6 +42,9 @@ public class EditorPengambilanObatActivity extends AppCompatActivity implements 
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Data Pengambilan Obat");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         setDataFromIntentExtra();
         initMidtransSdk();
