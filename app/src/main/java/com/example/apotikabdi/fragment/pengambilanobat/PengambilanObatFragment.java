@@ -14,7 +14,12 @@ import com.example.apotikabdi.R;
 import com.example.apotikabdi.fragment.rekomendasi.EditorRekomendasiHargaObatActivity;
 import com.example.apotikabdi.model.PengambilanObat;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -47,24 +52,33 @@ public class PengambilanObatFragment extends Fragment implements PengambilanObat
 
         //Saat tampilan direfresh
         swipeRefreshLayout.setOnRefreshListener(() -> pengambilanObatPresenter.getDaftarPengambilanObat());
-        //Saat card di ketuk
 
+        //Saat card di ketuk
 
         itemClickListener = ((view, position) -> {
 
-            String id_resep = pengambilanobat.get(position).getResep_id();
-            String nama_pasien = pengambilanobat.get(position).getPasien_nama();
-            String tanggal = pengambilanobat.get(position).getTanggal();
-            String sub_total = pengambilanobat.get(position).getTotalbiaya();
+            NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
+            String initialStringDate = pengambilanobat.get(position).getTanggal();
+            Locale id = new Locale("ID");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", id);
+            try {
+                Date date = format.parse(initialStringDate);
+                String tanggal = new SimpleDateFormat("dd/MM/yyyy", id).format(date);
 
-            Intent intent = new Intent(getActivity(), EditorPengambilanObatActivity.class);
-            intent.putExtra("id_resep", id_resep);
-            intent.putExtra("nama_pasien", nama_pasien);
-            intent.putExtra("tanggal", tanggal);
-            intent.putExtra("sub_total", sub_total);
+                String id_resep = pengambilanobat.get(position).getResep_id();
+                String nama_pasien = pengambilanobat.get(position).getPasien_nama();
+                String sub_total = numberFormat.format(Integer.parseInt(pengambilanobat.get(position).getTotalbiaya()));
 
-            startActivity(intent);
+                Intent intent = new Intent(getActivity(), EditorPengambilanObatActivity.class);
+                intent.putExtra("id_resep", id_resep);
+                intent.putExtra("nama_pasien", nama_pasien);
+                intent.putExtra("tanggal", tanggal);
+                intent.putExtra("sub_total", sub_total);
+                startActivity(intent);
 
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         });
 
         return root;

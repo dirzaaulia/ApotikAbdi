@@ -69,6 +69,20 @@ public class EditorPengambilanObatActivity extends AppCompatActivity implements 
         tanggal = intent.getStringExtra("tanggal");
         sub_total = intent.getStringExtra("sub_total");
 
+        /*
+        String strCurrentDate = tanggal;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd", new Locale("id", "ID"));
+        Date newDate = null;
+        try {
+            newDate = format.parse(strCurrentDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        format = new SimpleDateFormat("dd/MMM/yyyy", new Locale("id", "ID"));
+        tanggal = format.format(newDate);
+         */
+
         if (id_resep != null) {
             editTextIDResep.setText(id_resep);
             editTextNamaPasien.setText(nama_pasien);

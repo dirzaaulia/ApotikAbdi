@@ -42,7 +42,7 @@ public class EditorPasienActivity extends AppCompatActivity implements EditorPas
         bindViews();
 
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Tambah Data Antrian");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Tambah Data Pasien");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationOnClickListener(v -> finish());

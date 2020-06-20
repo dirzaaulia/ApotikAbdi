@@ -11,7 +11,11 @@ import com.example.apotikabdi.model.PengambilanObat;
 import com.google.android.material.card.MaterialCardView;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,11 +48,24 @@ public class PengambilanObatAdapter extends RecyclerView.Adapter<PengambilanObat
         String textNomorResep = "Nomor Resep : " + pengambilanObat.getResep_id();
         String textTotalBiaya = "Total Biaya : " + numberFormat.format(Integer.parseInt(pengambilanObat.getTotalbiaya()));
 
-        holder.textViewIDPengambilanObat.setText(pengambilanObat.getId());
-        holder.textViewNamaPasien.setText(pengambilanObat.getPasien_nama());
-        holder.textViewIDResep.setText(textNomorResep);
-        holder.textViewTanggal.setText(pengambilanObat.getTanggal());
-        holder.textViewTotalBiaya.setText(textTotalBiaya);
+        String initialStringDate = pengambilanObat.getTanggal();
+        Locale us = new Locale("US");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", us);
+        try {
+            Date date = format.parse(initialStringDate);
+            String stringDate = new SimpleDateFormat("dd/MM/yyyy", us).format(date);
+
+            String waktu = pengambilanObat.getHari() + " " + stringDate + " " + pengambilanObat.getJam();
+
+            holder.textViewIDPengambilanObat.setText(pengambilanObat.getId());
+            holder.textViewNamaPasien.setText(pengambilanObat.getPasien_nama());
+            holder.textViewIDResep.setText(textNomorResep);
+            holder.textViewTanggal.setText(waktu);
+            holder.textViewTotalBiaya.setText(textTotalBiaya);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

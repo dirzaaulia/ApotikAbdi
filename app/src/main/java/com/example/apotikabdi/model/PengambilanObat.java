@@ -14,9 +14,15 @@ public class PengambilanObat {
     @Expose
     @SerializedName("tanggal") private String tanggal;
     @Expose
+    @SerializedName("jam") private String jam;
+    @Expose
+    @SerializedName("hari") private String hari;
+    @Expose
     @SerializedName("resep_id") private String resep_id;
     @Expose
     @SerializedName("totalbiaya") private String totalbiaya;
+    @Expose
+    @SerializedName("status") private String status;
     @Expose
     @SerializedName("success") private Boolean success;
     @Expose
@@ -54,6 +60,22 @@ public class PengambilanObat {
         this.tanggal = tanggal;
     }
 
+    public String getJam() {
+        return jam;
+    }
+
+    public void setJam(String jam) {
+        this.jam = jam;
+    }
+
+    public String getHari() {
+        return hari;
+    }
+
+    public void setHari(String hari) {
+        this.hari = hari;
+    }
+
     public String getResep_id() {
         return resep_id;
     }
@@ -68,6 +90,14 @@ public class PengambilanObat {
 
     public void setTotalbiaya(String totalbiaya) {
         this.totalbiaya = totalbiaya;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Boolean getSuccess() {
