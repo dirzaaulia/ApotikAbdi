@@ -76,7 +76,7 @@ class EditorPasienPresenter {
             public void onFailure(@NonNull Call<Pasien> call, @NonNull Throwable t) {
 
                 view.hideProgress();
-                view.onRequestError("Terjadi kesalahan saat menambahkan data pasien");
+                view.onRequestError("Terjadi kesalahan saat mengubah data pasien");
 
             }
         });
@@ -106,7 +106,7 @@ class EditorPasienPresenter {
             @Override
             public void onFailure(@NonNull Call<Pasien> call, @NonNull Throwable t) {
                 view.hideProgress();
-                view.onRequestError(t.getLocalizedMessage());
+                view.onRequestError("Terjadi kesalahan saat menghapus data pasien");
             }
         });
     }

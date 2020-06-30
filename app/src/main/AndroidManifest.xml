@@ -15,8 +15,7 @@
         tools:ignore="AllowBackup"
         tools:replace="android:allowBackup">
 
-        <activity
-            android:name=".main.MainActivity">
+        <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -31,12 +30,17 @@
         <activity
             android:name=".fragment.pasien.EditorPasienActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".fragment.resep.EditorResepActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".fragment.pengambilanobat.EditorPengambilanObatActivity"
-            android:launchMode="singleTask"/>
         <activity
-            android:name=".fragment.rekomendasi.EditorRekomendasiHargaObatActivity"
+            android:name=".fragment.resep.EditorResepActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".fragment.pengambilanobat.EditorPengambilanObatActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".fragment.rekomendasi.RekomendasiActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".fragment.rekomendasi.EditorRekomendasiActivity"
             android:launchMode="singleTask"/>
 
         <meta-data
@@ -45,7 +49,6 @@
         <meta-data
             android:name="android.app.searchable"
             android:resource="@xml/searchable" />
-
     </application>
 
 </manifest>

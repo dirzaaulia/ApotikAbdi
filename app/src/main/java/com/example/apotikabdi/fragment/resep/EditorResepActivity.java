@@ -452,7 +452,7 @@ public class EditorResepActivity extends AppCompatActivity implements EditorRese
                     for (int i = 0; i < obatList.size(); i++) {
                         kodeObatListString[i] = obatList.get(i).getKodeobat();
                         namaObatListString[i] = obatList.get(i).getNamaobat();
-                        hargaObatListString[i] = obatList.get(i).getHarga();
+                        hargaObatListString[i] = obatList.get(i).getPerubahan_harga();
 
                         adapter = new ArrayAdapter<>(getBaseContext(), R.layout.dropdown_menu, namaObatListString);
                         autoCompleteTextViewObat1.setAdapter(adapter);

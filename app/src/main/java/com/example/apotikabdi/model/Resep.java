@@ -15,6 +15,8 @@ public class Resep {
     @Expose
     @SerializedName("totalharga") private String totalharga;
     @Expose
+    @SerializedName("hargadiskon") private String hargadiskon;
+    @Expose
     @SerializedName("success") private Boolean success;
     @Expose
     @SerializedName("message") private String message;
@@ -57,6 +59,14 @@ public class Resep {
 
     public void setTotalharga(String totalharga) {
         this.totalharga = totalharga;
+    }
+
+    public String getHargadiskon() {
+        return hargadiskon;
+    }
+
+    public void setHargadiskon(String hargadiskon) {
+        this.hargadiskon = hargadiskon;
     }
 
     public Boolean getSuccess() {

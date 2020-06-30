@@ -13,6 +13,8 @@ public class Obat {
     @Expose
     @SerializedName("harga") private String harga;
     @Expose
+    @SerializedName("perubahan_harga") private String perubahan_harga;
+    @Expose
     @SerializedName("success") private Boolean success;
     @Expose
     @SerializedName("message") private String message;
@@ -47,6 +49,14 @@ public class Obat {
 
     public void setHarga(String harga) {
         this.harga = harga;
+    }
+
+    public String getPerubahan_harga() {
+        return perubahan_harga;
+    }
+
+    public void setPerubahan_harga(String perubahan_harga) {
+        this.perubahan_harga = perubahan_harga;
     }
 
     public Boolean getSuccess() {

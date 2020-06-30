@@ -12,24 +12,29 @@ import com.midtrans.sdk.corekit.callback.TransactionFinishedCallback;
 import com.midtrans.sdk.corekit.core.MidtransSDK;
 import com.midtrans.sdk.corekit.core.TransactionRequest;
 import com.midtrans.sdk.corekit.core.themes.CustomColorTheme;
-import com.midtrans.sdk.corekit.models.BankType;
 import com.midtrans.sdk.corekit.models.CustomerDetails;
 import com.midtrans.sdk.corekit.models.ItemDetails;
-import com.midtrans.sdk.corekit.models.snap.CreditCard;
 import com.midtrans.sdk.corekit.models.snap.TransactionResult;
 import com.midtrans.sdk.uikit.SdkUIFlowBuilder;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.Executor;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 
 public class EditorPengambilanObatActivity extends AppCompatActivity implements TransactionFinishedCallback {
 
     TextInputEditText editTextIDResep, editTextNamaPasien, editTextTanggal, editTextSubTotal;
     Button buttonBayar;
     Toolbar toolbar;
+    Executor executor;
+    BiometricPrompt biometricPrompt;
+    BiometricPrompt.PromptInfo promptInfo;
 
     String id_resep, nama_pasien, tanggal, sub_total;
 
@@ -47,51 +52,44 @@ public class EditorPengambilanObatActivity extends AppCompatActivity implements 
         toolbar.setNavigationOnClickListener(v -> finish());
 
         setDataFromIntentExtra();
-        initMidtransSdk();
-        initActionButtons();
-    }
 
-    private void bindViews() {
+        executor = ContextCompat.getMainExecutor(this);
+        biometricPrompt = new BiometricPrompt(EditorPengambilanObatActivity.this, executor, new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+                Toast.makeText(getApplicationContext(),
+                        "Autentikasi Gagal : " + errString, Toast.LENGTH_SHORT)
+                        .show();
+            }
 
-        editTextIDResep = findViewById(R.id.edit_text_id_resep_pengambilan_obat);
-        editTextNamaPasien = findViewById(R.id.edit_text_nama_pasien_pengambilan_obat);
-        editTextTanggal = findViewById(R.id.edit_text_tanggal);
-        editTextSubTotal = findViewById(R.id.edit_text_subtotal_pengambilan_obat);
-        buttonBayar = findViewById(R.id.button_bayar);
-        toolbar = findViewById(R.id.toolbar_editor_pengambilan_obat);
-    }
+            @Override
+            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                Toast.makeText(getApplicationContext(),
+                        "Autentikasi Berhasil!", Toast.LENGTH_SHORT).show();
+            }
 
-    private void setDataFromIntentExtra() {
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+                Toast.makeText(getApplicationContext(), "Autentikasi Tidak Berhasil! Coba Ulangi Autentikasi Kembali",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
 
-        Intent intent = getIntent();
-        id_resep = intent.getStringExtra("id_resep");
-        nama_pasien = intent.getStringExtra("nama_pasien");
-        tanggal = intent.getStringExtra("tanggal");
-        sub_total = intent.getStringExtra("sub_total");
+        promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Autentikasi Pembayaran")
+                .setSubtitle("Autentikasi sidik jari untuk melanjutkan pembayaran")
+                //.setNegativeButtonText("Batal")
+                .setDeviceCredentialAllowed(true)
+                .build();
 
-        /*
-        String strCurrentDate = tanggal;
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd", new Locale("id", "ID"));
-        Date newDate = null;
-        try {
-            newDate = format.parse(strCurrentDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        buttonBayar.setOnClickListener(view -> biometricPrompt.authenticate(promptInfo));
 
-        format = new SimpleDateFormat("dd/MMM/yyyy", new Locale("id", "ID"));
-        tanggal = format.format(newDate);
-         */
-
-        if (id_resep != null) {
-            editTextIDResep.setText(id_resep);
-            editTextNamaPasien.setText(nama_pasien);
-            editTextTanggal.setText(tanggal);
-            editTextSubTotal.setText(sub_total);
-
-            //Objects.requireNonNull(getSupportActionBar()).setTitle("Data Pengambilan Obat");
-        }
-
+        //initMidtransSdk();
+        //initActionButtons();
     }
 
     private TransactionRequest initTransactionRequest() {
@@ -100,7 +98,7 @@ public class EditorPengambilanObatActivity extends AppCompatActivity implements 
                 TransactionRequest(System.currentTimeMillis() + "", 20000);
 
         //set customer details
-        transactionRequestNew.setCustomerDetails(initCustomerDetails());
+        //transactionRequestNew.setCustomerDetails(initCustomerDetails());
 
 
         // set item details
@@ -113,9 +111,9 @@ public class EditorPengambilanObatActivity extends AppCompatActivity implements 
 
 
         // Create creditcard options for payment
-        CreditCard creditCard = new CreditCard();
+        //CreditCard creditCard = new CreditCard();
 
-        creditCard.setSaveCard(false); // when using one/two click set to true and if normal set to  false
+        //creditCard.setSaveCard(false); // when using one/two click set to true and if normal set to  false
 
         //this methode deprecated use setAuthentication instead
         //creditCard.setSecure(true); // when using one click must be true, for normal and two click (optional)
@@ -123,10 +121,10 @@ public class EditorPengambilanObatActivity extends AppCompatActivity implements 
         //creditCard.setAuthentication(CreditCard.AUTHENTICATION_TYPE_3DS);
 
         // noted !! : channel migs is needed if bank type is BCA, BRI or MyBank
-//        creditCard.setChannel(CreditCard.MIGS); //set channel migs
-        creditCard.setBank(BankType.BCA); //set spesific acquiring bank
+        //creditCard.setChannel(CreditCard.MIGS); //set channel migs
+        //creditCard.setBank(BankType.BCA); //set spesific acquiring bank
 
-        transactionRequestNew.setCreditCard(creditCard);
+        //transactionRequestNew.setCreditCard(creditCard);
 
         return transactionRequestNew;
     }
@@ -182,9 +180,48 @@ public class EditorPengambilanObatActivity extends AppCompatActivity implements 
     }
 
     private void initActionButtons() {
-        buttonBayar.setOnClickListener(v -> {
-            MidtransSDK.getInstance().setTransactionRequest(initTransactionRequest());
-            MidtransSDK.getInstance().startPaymentUiFlow(EditorPengambilanObatActivity.this);
-        });
+        MidtransSDK.getInstance().setTransactionRequest(initTransactionRequest());
+        MidtransSDK.getInstance().startPaymentUiFlow(EditorPengambilanObatActivity.this);
+    }
+
+    private void bindViews() {
+
+        editTextIDResep = findViewById(R.id.edit_text_id_resep_pengambilan_obat);
+        editTextNamaPasien = findViewById(R.id.edit_text_nama_pasien_pengambilan_obat);
+        editTextTanggal = findViewById(R.id.edit_text_tanggal_pengambilan_obat);
+        editTextSubTotal = findViewById(R.id.edit_text_subtotal_pengambilan_obat);
+        buttonBayar = findViewById(R.id.button_bayar);
+        toolbar = findViewById(R.id.toolbar_editor_pengambilan_obat);
+    }
+
+    private void setDataFromIntentExtra() {
+
+        Intent intent = getIntent();
+        id_resep = intent.getStringExtra("id_resep");
+        nama_pasien = intent.getStringExtra("nama_pasien");
+        tanggal = intent.getStringExtra("tanggal");
+        sub_total = intent.getStringExtra("sub_total");
+
+        /*
+        String strCurrentDate = tanggal;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd", new Locale("id", "ID"));
+        Date newDate = null;
+        try {
+            newDate = format.parse(strCurrentDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        format = new SimpleDateFormat("dd/MMM/yyyy", new Locale("id", "ID"));
+        tanggal = format.format(newDate);
+         */
+
+        if (id_resep != null) {
+            editTextIDResep.setText(id_resep);
+            editTextNamaPasien.setText(nama_pasien);
+            editTextTanggal.setText(tanggal);
+            editTextSubTotal.setText(sub_total);
+        }
+
     }
 }

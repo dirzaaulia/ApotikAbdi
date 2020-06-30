@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.apotikabdi.R;
-import com.example.apotikabdi.fragment.rekomendasi.EditorRekomendasiHargaObatActivity;
+import com.example.apotikabdi.fragment.rekomendasi.RekomendasiActivity;
 import com.example.apotikabdi.model.PengambilanObat;
 
 import java.text.NumberFormat;
@@ -54,7 +54,6 @@ public class PengambilanObatFragment extends Fragment implements PengambilanObat
         swipeRefreshLayout.setOnRefreshListener(() -> pengambilanObatPresenter.getDaftarPengambilanObat());
 
         //Saat card di ketuk
-
         itemClickListener = ((view, position) -> {
 
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
@@ -94,7 +93,7 @@ public class PengambilanObatFragment extends Fragment implements PengambilanObat
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.menu_rekomendasi) {
-            Intent intent = new Intent(getActivity(), EditorRekomendasiHargaObatActivity.class);
+            Intent intent = new Intent(getActivity(), RekomendasiActivity.class);
             startActivity(intent);
             return false;
         }

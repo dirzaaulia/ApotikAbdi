@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.pengambilanobat.EditorPengambilanObatActivity">
+    tools:context=".fragment.rekomendasi.EditorRekomendasiActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:background="@color/colorPrimary">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_editor_pengambilan_obat"
+            android:id="@+id/toolbar_editor_rekomendasi"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:titleTextColor="@color/colorWhite" />
@@ -30,64 +30,81 @@
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_id_resep_pengambilan_obat"
+            android:id="@+id/layout_rekomendasi_obat_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nomor_resep"
+            android:hint="@string/contoh_kode_obat"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/edit_text_id_resep_pengambilan_obat"
+                android:id="@+id/edit_text_rekomendasi_obat_id"
                 android:enabled="false"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_nama_pasien"
+            android:id="@+id/layout_rekomendasi_nama_obat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nama_pasien"
+            android:hint="@string/nama_obat"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/edit_text_nama_pasien_pengambilan_obat"
+                android:id="@+id/edit_text_rekomendasi_nama_obat"
                 android:enabled="false"
                 tools:ignore="LabelFor" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_tanggal"
+            android:id="@+id/layout_rekomendasi_jumlah"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/tanggal"
+            android:hint="@string/jumlah"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/edit_text_tanggal_pengambilan_obat"
+                android:id="@+id/edit_text_rekomendasi_jumlah"
                 android:enabled="false"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_subtotal"
+            android:id="@+id/layout_rekomendasi_harga_awal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/sub_total"
+            android:hint="@string/total_harga"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_text_subtotal_pengambilan_obat"
+                android:id="@+id/edit_text_rekomendasi_harga_awal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:enabled="false"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_rekomendasi_perubahan_harga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/total_harga"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_rekomendasi_perubahan_harga"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
@@ -96,13 +113,6 @@
                 android:enabled="false"/>
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/button_bayar"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/bayar" />
 
     </LinearLayout>
 

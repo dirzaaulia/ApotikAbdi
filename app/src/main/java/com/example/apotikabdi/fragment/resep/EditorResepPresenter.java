@@ -62,7 +62,7 @@ class EditorResepPresenter {
             public void onFailure(@NonNull Call<PengambilanObat> call, @NonNull Throwable t) {
 
                 view.hideProgress();
-                view.onRequestError("Terjadi kesalahan saat menambahkan data pasien");
+                view.onRequestError("Terjadi kesalahan saat menambahkan data resep");
 
             }
         });
@@ -94,7 +94,7 @@ class EditorResepPresenter {
             public void onFailure(@NonNull Call<Resep> call, @NonNull Throwable t) {
 
                 view.hideProgress();
-                view.onRequestError("Terjadi kesalahan saat menambahkan data pasien");
+                view.onRequestError("Terjadi kesalahan saat mengubah data resep");
 
             }
         });
@@ -126,7 +126,7 @@ class EditorResepPresenter {
             public void onFailure(@NonNull Call<Resep> call, @NonNull Throwable t) {
 
                 view.hideProgress();
-                view.onRequestError("Terjadi kesalahan saat menambahkan data pasien");
+                view.onRequestError("Terjadi kesalahan saat menghapus data resep");
 
             }
         });

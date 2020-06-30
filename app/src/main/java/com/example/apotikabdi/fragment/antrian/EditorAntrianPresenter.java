@@ -75,7 +75,7 @@ class EditorAntrianPresenter {
             public void onFailure(@NonNull Call<Antrian> call, @NonNull Throwable t) {
 
                 view.hideProgress();
-                view.onRequestError("Terjadi kesalahan saat menambahkan data pasien");
+                view.onRequestError("Terjadi kesalahan saat mengubah data antrian");
 
             }
         });
@@ -105,7 +105,7 @@ class EditorAntrianPresenter {
             @Override
             public void onFailure(@NonNull Call<Antrian> call, @NonNull Throwable t) {
                 view.hideProgress();
-                view.onRequestError(t.getLocalizedMessage());
+                view.onRequestError("Terjadi kesalahan saat menghapus data antrian");
             }
         });
     }

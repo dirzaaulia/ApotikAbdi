@@ -122,4 +122,14 @@ public interface ApiInterface {
 
     @GET("pengambilanobat/ambildatapengambilanobat.php")
     Call<List<PengambilanObat>> getDaftarPengambilanObat();
+
+    @GET("rekomendasi/rekomendasiharga.php")
+    Call<List<Resep>> getDaftarRekomendasi();
+
+    @FormUrlEncoded
+    @POST("rekomendasi/terapkanrekomendasi.php")
+    Call<Obat> terapkanRekomendasi(
+            @Field("kodeobat") String kodeobat,
+            @Field("perubahan_harga") String perubahan_harga
+    );
 }
