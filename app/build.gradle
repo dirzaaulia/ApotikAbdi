@@ -57,7 +57,8 @@ dependencies {
 
     //Midtrans
     implementation 'com.midtrans:uikit:1.23.1'
+    //implementation 'com.midtrans:uikit:1.23.1-SANDBOX'
     //noinspection GradleDependency
-    implementation 'com.midtrans:uikit:1.23.1-SANDBOX'
+
 
 }

@@ -39,9 +39,14 @@ public class AntrianAdapter extends RecyclerView.Adapter<AntrianAdapter.Recycler
     public void onBindViewHolder(@NonNull RecyclerViewAdapter holder, int position) {
 
         Antrian antrian = antrianList.get(position);
+
+        String keluhan = "Keluhan : " + antrian.getKeluhan();
+        String status = "Status : " + antrian.getStatus();
+
         holder.textViewIDAntrian.setText(antrian.getId());
         holder.textViewNamaPasien.setText(antrian.getNama_pasien());
-        holder.textVieKeluhan.setText(antrian.getKeluhan());
+        holder.textViewKeluhan.setText(keluhan);
+        holder.textViewStatus.setText(status);
     }
 
     @Override
@@ -51,7 +56,7 @@ public class AntrianAdapter extends RecyclerView.Adapter<AntrianAdapter.Recycler
 
     static class RecyclerViewAdapter extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView textViewIDAntrian, textViewNamaPasien, textVieKeluhan;
+        TextView textViewIDAntrian, textViewNamaPasien, textViewKeluhan, textViewStatus;
         MaterialCardView materialCardView;
         ItemClickListener itemClickListener;
 
@@ -60,7 +65,8 @@ public class AntrianAdapter extends RecyclerView.Adapter<AntrianAdapter.Recycler
 
             textViewIDAntrian = itemView.findViewById(R.id.id_antrian);
             textViewNamaPasien = itemView.findViewById(R.id.nama_pasien_antrian);
-            textVieKeluhan = itemView.findViewById(R.id.keluhan);
+            textViewKeluhan = itemView.findViewById(R.id.keluhan);
+            textViewStatus = itemView.findViewById(R.id.status_antrian);
             materialCardView = itemView.findViewById(R.id.card_daftar_antrian);
 
             this.itemClickListener = itemClickListener;

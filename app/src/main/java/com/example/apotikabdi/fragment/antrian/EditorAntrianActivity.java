@@ -39,7 +39,7 @@ public class EditorAntrianActivity extends AppCompatActivity implements EditorAn
     Toolbar toolbar;
 
     ArrayAdapter<String> adapter;
-    String id, nama_pasien, keluhan;
+    String id, nama_pasien, keluhan, status;
     String[] namaPasienListString;
 
     EditorAntrianPresenter editorAntrianPresenter;
@@ -98,6 +98,8 @@ public class EditorAntrianActivity extends AppCompatActivity implements EditorAn
 
         nama_pasien = autoCompleteTextViewNamaPasien.getText().toString().trim();
         keluhan = Objects.requireNonNull(editTextKeluhan.getText()).toString().trim();
+        status = "Onsite";
+
 
         switch (item.getItemId()) {
 
@@ -116,7 +118,7 @@ public class EditorAntrianActivity extends AppCompatActivity implements EditorAn
                 if (keluhan.isEmpty()) {
                     editTextKeluhan.setError("Keluhan tidak boleh kosong");
                 } else {
-                    editorAntrianPresenter.tambahAntrian(nama_pasien, keluhan);
+                    editorAntrianPresenter.tambahAntrian(nama_pasien, keluhan, status);
                 }
 
                 return true;

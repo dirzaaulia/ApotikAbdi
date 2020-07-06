@@ -56,7 +56,8 @@ public interface ApiInterface {
     @POST("antrian/tambahdataantrian.php")
     Call<Antrian> tambahAntrian(
             @Field("nama_pasien") String nama_pasien,
-            @Field("keluhan") String keluhan
+            @Field("keluhan") String keluhan,
+            @Field("status") String status
     );
 
     @GET("antrian/ambildataantrian.php")

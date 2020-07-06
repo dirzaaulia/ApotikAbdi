@@ -54,4 +54,5 @@
     <string name="contoh_nama_obat">ALLUPURINOL 100</string>
     <string name="contoh_harga_awal">Harga Awal Per Satuan : Rp.322</string>
     <string name="contoh_harga_akhir">Harga Akhir Per Satuan : Rp.305</string>
+    <string name="status_antrian">Status Antrian</string>
 </resources>

@@ -32,10 +32,11 @@
 
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:orientation="vertical"
         android:layout_marginStart="25dp">
 
         <TextView
@@ -50,10 +51,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/keluhan"
-            android:textSize="12sp"
-            android:layout_below="@+id/nama_pasien_antrian"
             android:text="@string/keluhan" />
 
-    </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/status_antrian"
+            android:text="@string/status_antrian"/>
+
+    </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

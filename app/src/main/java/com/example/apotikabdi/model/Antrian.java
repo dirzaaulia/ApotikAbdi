@@ -12,6 +12,8 @@ public class Antrian {
     @Expose
     @SerializedName("keluhan") private String keluhan;
     @Expose
+    @SerializedName("status") private String status;
+    @Expose
     @SerializedName("success") private Boolean success;
     @Expose
     @SerializedName("message") private String message;
@@ -38,6 +40,14 @@ public class Antrian {
 
     public void setKeluhan(String keluhan) {
         this.keluhan = keluhan;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Boolean getSuccess() {

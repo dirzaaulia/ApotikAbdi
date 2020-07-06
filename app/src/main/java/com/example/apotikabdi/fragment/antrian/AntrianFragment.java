@@ -56,12 +56,13 @@ public class AntrianFragment extends Fragment implements AntrianView {
             String id = antrian.get(position).getId();
             String nama_pasien = antrian.get(position).getNama_pasien();
             String keluhan = antrian.get(position).getKeluhan();
-
+            String status = antrian.get(position).getStatus();
 
             Intent intent = new Intent(getActivity(), EditorAntrianActivity.class);
             intent.putExtra("id", id);
             intent.putExtra("nama_pasien", nama_pasien);
             intent.putExtra("keluhan", keluhan);
+            intent.putExtra("status", status);
 
             startActivityForResult(intent, INTENT_EDIT);
 

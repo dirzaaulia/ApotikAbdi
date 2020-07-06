@@ -17,11 +17,11 @@ class EditorAntrianPresenter {
         this.view = view;
     }
 
-    void tambahAntrian(final String nama_pasien, final String keluhan) {
+    void tambahAntrian(final String nama_pasien, final String keluhan, final String status) {
 
         view.showProgress();
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<Antrian> call = apiInterface.tambahAntrian(nama_pasien, keluhan);
+        Call<Antrian> call = apiInterface.tambahAntrian(nama_pasien, keluhan, status);
         call.enqueue(new Callback<Antrian>() {
             @Override
             public void onResponse(@NonNull Call<Antrian> call, @NonNull Response<Antrian> response) {
