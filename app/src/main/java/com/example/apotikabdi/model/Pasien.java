@@ -18,7 +18,11 @@ public class Pasien {
     @Expose
     @SerializedName("alamat") private String alamat;
     @Expose
+    @SerializedName("kode_pos") private String kode_pos;
+    @Expose
     @SerializedName("nohp") private String nohp;
+    @Expose
+    @SerializedName("email") private String email;
     @Expose
     @SerializedName("success") private Boolean success;
     @Expose
@@ -72,12 +76,28 @@ public class Pasien {
         this.alamat = alamat;
     }
 
+    public String getKode_pos() {
+        return kode_pos;
+    }
+
+    public void setKode_pos(String kode_pos) {
+        this.kode_pos = kode_pos;
+    }
+
     public String getNohp() {
         return nohp;
     }
 
     public void setNohp(String nohp) {
         this.nohp = nohp;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Boolean getSuccess() {

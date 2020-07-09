@@ -17,7 +17,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -56,9 +56,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 
     //Midtrans
-    implementation 'com.midtrans:uikit:1.23.1'
-    //implementation 'com.midtrans:uikit:1.23.1-SANDBOX'
+    //implementation 'com.midtrans:uikit:1.23.2'
     //noinspection GradleDependency
+    implementation 'com.midtrans:uikit:1.23.2-SANDBOX'
 
 
 }

@@ -70,7 +70,9 @@ public class PasienFragment extends Fragment implements PasienView {
             String tanggal_lahir = pasien.get(position).getTanggal_lahir();
             String jenis_kelamin = pasien.get(position).getJenis_kelamin();
             String alamat = pasien.get(position).getAlamat();
+            String kode_pos = pasien.get(position).getKode_pos();
             String nohp = pasien.get(position).getNohp();
+            String email = pasien.get(position).getEmail();
             String status = "edit";
 
             Intent intent = new Intent(getActivity(), EditorPasienActivity.class);
@@ -80,7 +82,9 @@ public class PasienFragment extends Fragment implements PasienView {
             intent.putExtra("tanggal_lahir", tanggal_lahir);
             intent.putExtra("jenis_kelamin", jenis_kelamin);
             intent.putExtra("alamat", alamat);
+            intent.putExtra("kode_pos", kode_pos);
             intent.putExtra("nohp", nohp);
+            intent.putExtra("email", email);
             intent.putExtra("status", status);
             startActivityForResult(intent, INTENT_EDIT);
 

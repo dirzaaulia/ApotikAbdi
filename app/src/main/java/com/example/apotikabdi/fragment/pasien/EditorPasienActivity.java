@@ -23,14 +23,14 @@ import androidx.appcompat.widget.Toolbar;
 
 public class EditorPasienActivity extends AppCompatActivity implements EditorPasienView {
 
-    TextInputEditText editTextRekamMedis, editTextNamaPasien, editTextTanggalLahir, editTextAlamat, editTextNomorHandphone;
+    TextInputEditText editTextRekamMedis, editTextNamaPasien, editTextTanggalLahir, editTextAlamat, editTextKodePos, editTextNomorHandphone, editTextEmail;
     RadioGroup radioGroupJenisKelamin;
     RadioButton radioButtonJenisKelamin, radioButtonLakiLaki, radioButtonPerempuan;
     ProgressDialog progressDialog;
     Menu actionMenu;
     Toolbar toolbar;
 
-    String id, no_rekammedis, nama, tanggal_lahir, jenis_kelamin, alamat, nohp;
+    String id, no_rekammedis, nama, tanggal_lahir, jenis_kelamin, alamat, kode_pos, nohp, email;
 
     EditorPasienPresenter editorPasienPresenter;
 
@@ -88,14 +88,15 @@ public class EditorPasienActivity extends AppCompatActivity implements EditorPas
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        int idJenisKelamin = radioGroupJenisKelamin.getCheckedRadioButtonId();
-        radioButtonJenisKelamin = findViewById(idJenisKelamin);
+        radioButtonJenisKelamin = findViewById(radioGroupJenisKelamin.getCheckedRadioButtonId());
         no_rekammedis = Objects.requireNonNull(editTextRekamMedis.getText()).toString().trim();
         nama = Objects.requireNonNull(editTextNamaPasien.getText()).toString().trim();
         tanggal_lahir = Objects.requireNonNull(editTextTanggalLahir.getText()).toString().trim();
         jenis_kelamin = radioButtonJenisKelamin.getText().toString().trim();
         alamat = Objects.requireNonNull(editTextAlamat.getText()).toString().trim();
+        kode_pos = Objects.requireNonNull(editTextKodePos.getText()).toString().trim();
         nohp = Objects.requireNonNull(editTextNomorHandphone.getText()).toString().trim();
+        email = Objects.requireNonNull(editTextEmail.getText()).toString().trim();
 
         switch (item.getItemId()) {
             case R.id.edit:
@@ -118,15 +119,20 @@ public class EditorPasienActivity extends AppCompatActivity implements EditorPas
                     editTextTanggalLahir.setError("Tanggal lahir pasien tidak boleh kosong");
                 } else if (alamat.isEmpty()) {
                     editTextAlamat.setError("Alamat pasien tidak boleh kosong");
+                } else if (kode_pos.isEmpty()){
+                    editTextKodePos.setError("Kode pos pasien tidak boleh kosong");
                 } else if (nohp.isEmpty()) {
                     editTextNomorHandphone.setError("Nomor handphone pasien tidak boleh kosong");
+                } else if (email.isEmpty()) {
+                    editTextEmail.setError("Email pasien tidak boleh kosong");
                 } else {
-                    editorPasienPresenter.tambahPasien(no_rekammedis, nama, tanggal_lahir, jenis_kelamin, alamat, nohp);
+                    editorPasienPresenter.tambahPasien(no_rekammedis, nama, tanggal_lahir, jenis_kelamin, alamat, kode_pos, nohp, email);
                 }
 
                 return true;
 
             case R.id.update:
+
 
                 if (no_rekammedis.isEmpty()) {
                     editTextRekamMedis.setError("Nomor rekam medis tidak boleh kosong");
@@ -136,10 +142,14 @@ public class EditorPasienActivity extends AppCompatActivity implements EditorPas
                     editTextTanggalLahir.setError("Tanggal lahir pasien tidak boleh kosong");
                 } else if (alamat.isEmpty()) {
                     editTextAlamat.setError("Alamat pasien tidak boleh kosong");
+                } else if (kode_pos.isEmpty()){
+                    editTextKodePos.setError("Kode pos pasien tidak boleh kosong");
                 } else if (nohp.isEmpty()) {
                     editTextNomorHandphone.setError("Nomor handphone pasien tidak boleh kosong");
+                } else if (email.isEmpty()){
+                    editTextEmail.setError("Email pasien tidak boleh kosong");
                 } else {
-                    editorPasienPresenter.ubahPasien(id, no_rekammedis, nama, tanggal_lahir, jenis_kelamin, alamat, nohp);
+                    editorPasienPresenter.ubahPasien(id, no_rekammedis, nama, tanggal_lahir, jenis_kelamin, alamat, kode_pos, nohp, email);
                 }
 
                 return true;
@@ -191,7 +201,9 @@ public class EditorPasienActivity extends AppCompatActivity implements EditorPas
         tanggal_lahir = intent.getStringExtra("tanggal_lahir");
         jenis_kelamin = intent.getStringExtra("jenis_kelamin");
         alamat = intent.getStringExtra("alamat");
+        kode_pos = intent.getStringExtra("kode_pos");
         nohp = intent.getStringExtra("nohp");
+        email = intent.getStringExtra("email");
 
         if (id != null) {
 
@@ -199,12 +211,14 @@ public class EditorPasienActivity extends AppCompatActivity implements EditorPas
             editTextNamaPasien.setText(nama);
             editTextTanggalLahir.setText(tanggal_lahir);
             editTextAlamat.setText(alamat);
+            editTextKodePos.setText(kode_pos);
             editTextNomorHandphone.setText(nohp);
+            editTextEmail.setText(email);
 
-            if (jenis_kelamin.equals("laki-laki")) {
+            if (jenis_kelamin.equalsIgnoreCase("laki-laki")) {
                 radioGroupJenisKelamin.clearCheck();
                 radioGroupJenisKelamin.check(R.id.laki_laki);
-            } else if (jenis_kelamin.equals("perempuan")) {
+            } else if (jenis_kelamin.equalsIgnoreCase("perempuan")) {
                 radioGroupJenisKelamin.clearCheck();
                 radioGroupJenisKelamin.check(R.id.perempuan);
             }
@@ -222,7 +236,9 @@ public class EditorPasienActivity extends AppCompatActivity implements EditorPas
         editTextNamaPasien.setEnabled(true);
         editTextTanggalLahir.setEnabled(true);
         editTextAlamat.setEnabled(true);
+        editTextKodePos.setEnabled(true);
         editTextNomorHandphone.setEnabled(true);
+        editTextEmail.setEnabled(true);
         radioButtonLakiLaki.setClickable(true);
         radioButtonPerempuan.setClickable(true);
     }
@@ -233,7 +249,9 @@ public class EditorPasienActivity extends AppCompatActivity implements EditorPas
         editTextNamaPasien.setEnabled(false);
         editTextTanggalLahir.setEnabled(false);
         editTextAlamat.setEnabled(false);
+        editTextKodePos.setEnabled(false);
         editTextNomorHandphone.setEnabled(false);
+        editTextEmail.setEnabled(false);
         radioButtonLakiLaki.setClickable(false);
         radioButtonPerempuan.setClickable(false);
     }
@@ -244,7 +262,9 @@ public class EditorPasienActivity extends AppCompatActivity implements EditorPas
         editTextNamaPasien = findViewById(R.id.nama_pasien);
         editTextTanggalLahir = findViewById(R.id.tanggal_lahir);
         editTextAlamat = findViewById(R.id.alamat);
+        editTextKodePos = findViewById(R.id.kode_pos);
         editTextNomorHandphone = findViewById(R.id.nomor_handphone);
+        editTextEmail = findViewById(R.id.email);
 
         radioGroupJenisKelamin = findViewById(R.id.jenis_kelamin);
         radioButtonLakiLaki = findViewById(R.id.laki_laki);

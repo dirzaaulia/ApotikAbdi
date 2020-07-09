@@ -55,4 +55,10 @@
     <string name="contoh_harga_awal">Harga Awal Per Satuan : Rp.322</string>
     <string name="contoh_harga_akhir">Harga Akhir Per Satuan : Rp.305</string>
     <string name="status_antrian">Status Antrian</string>
+    <string name="detail_resep">Ketuk untuk melihat daftar obat</string>
+    <string name="bayar_online">Pembayaran Online</string>
+    <string name="pembayaran_tunai">Jumlah Uang Tunai</string>
+    <string name="kembalian_pembayaran_tunai">Kembalian</string>
+    <string name="bayar_tunai">Pembayaran Tunai</string>
+    <string name="kode_pos">Kode Pos</string>
 </resources>

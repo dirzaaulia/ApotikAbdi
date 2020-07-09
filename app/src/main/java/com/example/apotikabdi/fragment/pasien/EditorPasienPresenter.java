@@ -17,12 +17,12 @@ class EditorPasienPresenter {
         this.view = view;
     }
 
-    void tambahPasien(final String no_rekammedis, final String nama, final String tanggal_lahir, final String jenis_kelamin, final String alamat, final String nohp) {
+    void tambahPasien(final String no_rekammedis, final String nama, final String tanggal_lahir, final String jenis_kelamin, final String alamat, final String kode_pos, final String nohp, final String email) {
 
         view.showProgress();
 
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<Pasien> call = apiInterface.tambahPasien(no_rekammedis, nama, tanggal_lahir, jenis_kelamin, alamat, nohp);
+        Call<Pasien> call = apiInterface.tambahPasien(no_rekammedis, nama, tanggal_lahir, jenis_kelamin, alamat, kode_pos, nohp, email);
         call.enqueue(new Callback<Pasien>() {
             @Override
             public void onResponse(@NonNull Call<Pasien> call, @NonNull Response<Pasien> response) {
@@ -50,11 +50,11 @@ class EditorPasienPresenter {
         });
     }
 
-    void ubahPasien(String id, String no_rekammedis, String nama, String tanggal_lahir, String jenis_kelamin, String alamat, String nohp) {
+    void ubahPasien(String id, String no_rekammedis, String nama, String tanggal_lahir, String jenis_kelamin, String alamat, String kode_pos, String nohp, String email) {
 
         view.showProgress();
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<Pasien> call = apiInterface.ubahPasien(id, no_rekammedis, nama, tanggal_lahir, jenis_kelamin, alamat, nohp);
+        Call<Pasien> call = apiInterface.ubahPasien(id, no_rekammedis, nama, tanggal_lahir, jenis_kelamin, alamat, kode_pos,  nohp, email);
         call.enqueue(new Callback<Pasien>() {
             @Override
             public void onResponse(@NonNull Call<Pasien> call, @NonNull Response<Pasien> response) {

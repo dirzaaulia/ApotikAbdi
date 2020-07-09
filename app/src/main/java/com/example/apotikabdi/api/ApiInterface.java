@@ -26,11 +26,18 @@ public interface ApiInterface {
             @Field("tanggal_lahir") String tanggal_lahir,
             @Field("jenis_kelamin") String jenis_kelamin,
             @Field("alamat") String alamat,
-            @Field("nohp") String nohp
+            @Field("kode_pos") String kode_pos,
+            @Field("nohp") String nohp,
+            @Field("email") String email
     );
 
     @GET("pasien/ambildatapasien.php")
     Call<List<Pasien>> getDaftarPasien(
+            @Query("key") String keyword
+    );
+
+    @GET("pasien/ambildetailpasien.php")
+    Call<List<Pasien>> getDetailPasien(
             @Query("key") String keyword
     );
 
@@ -43,7 +50,9 @@ public interface ApiInterface {
             @Field("tanggal_lahir") String tanggal_lahir,
             @Field("jenis_kelamin") String jenis_kelamin,
             @Field("alamat") String alamat,
-            @Field("nohp") String nohp
+            @Field("kode_pos") String kode_Pos,
+            @Field("nohp") String nohp,
+            @Field("email") String email
     );
 
     @FormUrlEncoded
@@ -86,6 +95,11 @@ public interface ApiInterface {
     @GET("resep/ambildataresep.php")
     Call<List<Resep>> getDaftarResep();
 
+    @GET("resep/ambildetailresep.php")
+    Call<List<Resep>> getDetailResep(
+            @Query("key") String keyword
+    );
+
     @FormUrlEncoded
     @POST("resep/tambahdataresep.php")
     Call<Resep> tambahResep(
@@ -123,6 +137,13 @@ public interface ApiInterface {
 
     @GET("pengambilanobat/ambildatapengambilanobat.php")
     Call<List<PengambilanObat>> getDaftarPengambilanObat();
+
+    @FormUrlEncoded
+    @POST("pengambilanobat/ubahpengambilanobat.php")
+    Call<PengambilanObat> ubahPengambilanObat(
+            @Field("id") String id,
+            @Field("status") String status
+    );
 
     @GET("rekomendasi/rekomendasiharga.php")
     Call<List<Resep>> getDaftarRekomendasi();

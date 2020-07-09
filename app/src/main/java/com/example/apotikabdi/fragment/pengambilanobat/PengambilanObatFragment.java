@@ -64,15 +64,19 @@ public class PengambilanObatFragment extends Fragment implements PengambilanObat
                 Date date = format.parse(initialStringDate);
                 String tanggal = new SimpleDateFormat("dd/MM/yyyy", id).format(date);
 
+                String id_pengambilan_obat = pengambilanobat.get(position).getId();
                 String id_resep = pengambilanobat.get(position).getResep_id();
                 String nama_pasien = pengambilanobat.get(position).getPasien_nama();
                 String sub_total = numberFormat.format(Integer.parseInt(pengambilanobat.get(position).getTotalbiaya()));
+                String int_sub_total = pengambilanobat.get(position).getTotalbiaya();
 
                 Intent intent = new Intent(getActivity(), EditorPengambilanObatActivity.class);
+                intent.putExtra("id", id_pengambilan_obat);
                 intent.putExtra("id_resep", id_resep);
                 intent.putExtra("nama_pasien", nama_pasien);
                 intent.putExtra("tanggal", tanggal);
                 intent.putExtra("sub_total", sub_total);
+                intent.putExtra("int_sub_total", int_sub_total);
                 startActivity(intent);
 
             } catch (ParseException e) {
